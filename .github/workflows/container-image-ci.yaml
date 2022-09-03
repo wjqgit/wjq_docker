@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  Docker-Build-and-Push:
+  Build-Base:
     runs-on: ubuntu-latest
     steps:
       -
@@ -21,9 +21,21 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       -
-        name: Build and Push
+        name: Build and Push Base
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:base"
           push: true
-          tags: wjqcontainer/base-ubuntu:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/base-focal:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/base-focal:latest
+          cache-to: type=inline
+      
+      -
+        name: Build and Push Conda
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{defaultContext}}:conda"
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/focal-conda:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/focal-conda:latest
+          cache-to: type=inline
