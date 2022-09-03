@@ -1,6 +1,5 @@
 ARG base_image=base-focal
-# FROM wjqcontainer/${base_image}
-FROM registry.wm.home/${base_image}
+FROM wjqcontainer/${base_image}
 
 # install conda/mamba
 ENV DEBIAN_FRONTEND noninteractive
