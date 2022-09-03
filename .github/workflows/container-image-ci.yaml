@@ -26,4 +26,4 @@ jobs:
         with:
           context: "{{defaultContext}}:base"
           push: true
-          tags: wjqcloud/base-ubuntu:latest
+          tags: wjqcontainer/base-ubuntu:latest
