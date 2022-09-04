@@ -15,7 +15,7 @@ USER ${USERNAME}
 ENV HOME=/home/${USERNAME}
 
 # install conda
-RUN curl micro.mamba.pm/install.sh | bash
+RUN curl -f micro.mamba.pm/install.sh | bash
 
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/bin/bash" ]
