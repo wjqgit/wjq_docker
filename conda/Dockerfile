@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND dialog
 # switch user 
 USER ${USERNAME}
 ENV HOME=/home/${USERNAME}
-ENV PATH="${HOME}/micromamba/bin:${PATH}"
+
 # install conda
 RUN curl micro.mamba.pm/install.sh | bash
 
