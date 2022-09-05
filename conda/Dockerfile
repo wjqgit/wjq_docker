@@ -15,7 +15,13 @@ USER ${USERNAME}
 ENV HOME=/home/${USERNAME}
 
 # install conda
-RUN curl -f micro.mamba.pm/install.sh | bash
+## automatic
+# RUN curl -f micro.mamba.pm/install.sh | bash
+## manual
+ENV PATH="${HOME}/.local/bin:${PATH}"
+RUN mkdir -p ~/.local/bin && \
+    curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C ~/.local/bin/ --strip-components=1 bin/micromamba && \
+    micromamba shell init -s bash -p ${HOME}/micromamba 
 
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/bin/bash" ]
