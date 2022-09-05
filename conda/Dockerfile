@@ -20,7 +20,9 @@ ENV HOME=/home/${USERNAME}
 ## manual
 ENV PATH="${HOME}/.local/bin:${PATH}"
 RUN mkdir -p ~/.local/bin && \
-    curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C ~/.local/bin/ --strip-components=1 bin/micromamba && \
+    curl -L --retry 5 -o /tmp/micromamba.tar.bz2 https://micro.mamba.pm/api/micromamba/linux-64/latest && \
+    tar -xvj -f /tmp/micromamba.tar.bz2 -C ~/.local/bin/ --strip-components=1 bin/micromamba && \
+    rm /tmp/micromamba.tar.bz2 && \
     micromamba shell init -s bash -p ${HOME}/micromamba 
 
 SHELL ["/bin/bash", "--login", "-c"]
